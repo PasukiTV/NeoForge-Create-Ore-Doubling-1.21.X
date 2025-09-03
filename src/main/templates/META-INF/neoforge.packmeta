@@ -1,0 +1,18 @@
+{
+  "packs": [
+    {
+      "pack_format": 48,
+      "description": "Data pack for your mod",
+      "type": "data",
+      "path": "data",
+      "priority": "top"
+    },
+    {
+      "pack_format": 48,
+      "description": "Resource pack for your mod",
+      "type": "resources",
+      "path": "assets",
+      "priority": "top"
+    }
+  ]
+}
