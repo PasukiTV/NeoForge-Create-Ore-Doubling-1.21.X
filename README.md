@@ -28,7 +28,7 @@ Config path (server/client):
 
 - `config/create_ore_doubling-common.toml`
 
-Values are expected between `0.0` and `1.0`.
+Values are expected between `0.0` and `1.0` (`0.5 = 50%`, `0.75 = 75%`).
 
 ## Development
 
