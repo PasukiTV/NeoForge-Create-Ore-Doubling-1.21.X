@@ -1,13 +1,8 @@
 {
-  "itemGroup.examplemod": "Example Mod Tab",
-  "block.examplemod.example_block": "Example Block",
-  "item.examplemod.example_item": "Example Item",
-
-  "examplemod.configuration.title": "Example Mod Configs",
-  "examplemod.configuration.section.examplemod.common.toml": "Example Mod Configs",
-  "examplemod.configuration.section.examplemod.common.toml.title": "Example Mod Configs",
-  "examplemod.configuration.items": "Item List",
-  "examplemod.configuration.logDirtBlock": "Log Dirt Block",
-  "examplemod.configuration.magicNumberIntroduction": "Magic Number Text",
-  "examplemod.configuration.magicNumber": "Magic Number"
+  "create_ore_doubling.configuration.title": "Create Ore Doubling Config",
+  "create_ore_doubling.configuration.section.create_ore_doubling.common.toml": "Create Ore Doubling",
+  "create_ore_doubling.configuration.section.create_ore_doubling.common.toml.title": "General",
+  "create_ore_doubling.configuration.rawOreExtraDropChance": "Raw Ore Extra Drop Chance",
+  "create_ore_doubling.configuration.rawOreBlockExtraDropChance": "Raw Ore Block Extra Drop Chance",
+  "create_ore_doubling.configuration.experienceNuggetChance": "Experience Nugget Chance"
 }
