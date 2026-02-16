@@ -1,21 +1,45 @@
 # Create Ore Doubling (NeoForge 1.21.1)
 
-Create Ore Doubling is a lightweight addon for the [Create](https://www.curseforge.com/minecraft/mc-mods/create) mod.
-It adds and balances crushing recipes so raw ores and raw ore blocks produce extra crushed ore outputs.
+Create: Double Ores expands the crushing process in the [Create](https://www.curseforge.com/minecraft/mc-mods/create) mod to make raw ores more rewarding.
+By feeding raw ores or raw ore blocks into Create's Crushing Wheels, you receive guaranteed crushed outputs with a configurable chance for additional bonus materials.
 
-## Features
+This introduces ore doubling (and beyond) directly into the Create workflow, making automation lines more efficient and satisfying.
 
-- Crushing recipes for raw **iron**, **gold**, **copper**, and **zinc**.
-- Crushing recipes for corresponding **raw ore blocks**.
-- Extra outputs are chance-based to preserve Create-style progression and automation balancing.
-- Includes polished in-game config localization for **English** and **German**.
+## CurseForge Description (updated)
 
-## Compatibility
+### ✨ Features
+
+- New crushing recipes for **Raw Iron, Raw Copper, Raw Gold, and Raw Zinc** (items and raw ore blocks).
+- Guaranteed crushed ore baseline:
+  - **1 crushed ore** per raw ore item
+  - **9 crushed ores** per raw ore block
+- Configurable bonus crushed ores (default: **up to +50%**), preserving Create-style progression.
+- Bonus **Experience Nuggets** as byproducts (item and block recipes use separate config values).
+- Full config support for each ore type and for raw ore blocks, so modpacks can tune balance precisely.
+- In-game configuration localization for **English** and **German**.
+
+### ✅ Compatibility
 
 - Minecraft **1.21.1**
 - NeoForge **21.1.x**
-- Create **6.0.6+** (within the configured range)
+- Create **6.0.6+** (within configured version range)
 
+### 🔧 Requires
+
+- Create
+
+### 📦 Modpacks
+
+- Allowed
+
+### 🏭 Why Use It?
+
+Whether you are building fully automated ore processing factories or just want to squeeze more value out of mining trips,
+Create: Double Ores makes resources go further and enhances the satisfaction of watching massive Crushing Wheels grind raw materials into riches.
+
+### 🐛 Feedback
+
+If you encounter bugs or have feature requests, please open an issue or leave feedback in the project channel.
 
 ## Configuration
 
