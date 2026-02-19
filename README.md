@@ -60,7 +60,7 @@ The config is organized by recipe groups:
 
 Config path (server/client):
 
-- `config/create_ore_doubling-common.toml`
+- `config/create_double_ore-common.toml`
 
 All values use `0.0` to `1.0` (`0.5 = 50%`, `0.75 = 75%`).
 

@@ -1,4 +1,4 @@
-package de.pasuki.create_ore_doubling;
+package de.pasuki.create.double_ores;
 
 import com.mojang.logging.LogUtils;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -18,9 +18,9 @@ import org.slf4j.Logger;
 import java.lang.reflect.Field;
 import java.util.List;
 
-@Mod(Create_Ore_Doubling.MOD_ID)
-public class Create_Ore_Doubling {
-    public static final String MOD_ID = "create_ore_doubling";
+@Mod(Create_Double_Ore.MOD_ID)
+public class Create_Double_Ore {
+    public static final String MOD_ID = "create_double_ore";
     public static final Logger LOGGER = LogUtils.getLogger();
 
     private static final ResourceLocation[] RAW_ORE_RECIPES = {
@@ -37,7 +37,7 @@ public class Create_Ore_Doubling {
             ResourceLocation.parse("create:crushing/raw_zinc_block")
     };
 
-    public Create_Ore_Doubling(IEventBus ignoredModEventBus, ModContainer modContainer) {
+    public Create_Double_Ore(IEventBus ignoredModEventBus, ModContainer modContainer) {
         NeoForge.EVENT_BUS.register(this);
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
@@ -95,9 +95,6 @@ public class Create_Ore_Doubling {
             }
 
             ResourceLocation itemId = BuiltInRegistries.ITEM.getKey(stack.getItem());
-            if (itemId == null) {
-                continue;
-            }
 
             if ("create".equals(itemId.getNamespace()) && "experience_nugget".equals(itemId.getPath())) {
                 if (setChance(output, experienceChance, recipeId)) {
