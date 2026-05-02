@@ -2,46 +2,62 @@ package de.pasuki.create.double_ores.message;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.datafix.DataFixTypes;
 import net.minecraft.world.level.saveddata.SavedData;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 public class WelcomeMessageData extends SavedData {
     private static final String DATA_NAME = "create_ore_doubling_welcome";
-    private static final String KEY_SHOWN = "shown";
+    private static final String KEY_SHOWN_PLAYERS = "shown_players";
+    private static final String KEY_PLAYER_ID = "player_id";
 
-    private boolean shown = false;
+    private final Set<UUID> shownPlayers = new HashSet<>();
 
-    public WelcomeMessageData() {}
-
-    // 1.21.x: load hat Provider als Parameter
     public static WelcomeMessageData load(CompoundTag tag, HolderLookup.Provider provider) {
         WelcomeMessageData data = new WelcomeMessageData();
-        data.shown = tag.getBoolean(KEY_SHOWN);
+        ListTag list = tag.getList(KEY_SHOWN_PLAYERS, Tag.TAG_COMPOUND);
+        for (int i = 0; i < list.size(); i++) {
+            CompoundTag playerEntry = list.getCompound(i);
+            if (playerEntry.hasUUID(KEY_PLAYER_ID)) {
+                data.shownPlayers.add(playerEntry.getUUID(KEY_PLAYER_ID));
+            }
+        }
         return data;
     }
 
-    // 1.21.x: save hat Provider als Parameter (kein save(CompoundTag) mehr!)
     @Override
     public @NotNull CompoundTag save(CompoundTag tag, HolderLookup.@NotNull Provider provider) {
-        tag.putBoolean(KEY_SHOWN, shown);
+        ListTag list = new ListTag();
+        for (UUID uuid : shownPlayers) {
+            CompoundTag playerEntry = new CompoundTag();
+            playerEntry.putUUID(KEY_PLAYER_ID, uuid);
+            list.add(playerEntry);
+        }
+        tag.put(KEY_SHOWN_PLAYERS, list);
         return tag;
     }
 
-    /** Wichtig: Overworld nutzen, dann ist es wirklich "pro Welt" */
     public static WelcomeMessageData get(ServerLevel overworld) {
         return overworld.getDataStorage().computeIfAbsent(
-                new SavedData.Factory<>(WelcomeMessageData::new, WelcomeMessageData::load),
+                new SavedData.Factory<>(WelcomeMessageData::new, WelcomeMessageData::load, DataFixTypes.LEVEL),
                 DATA_NAME
         );
     }
 
-    public boolean wasShown() {
-        return shown;
+    public boolean wasShown(UUID playerId) {
+        return shownPlayers.contains(playerId);
     }
 
-    public void setShown() {
-        this.shown = true;
-        setDirty();
+    public void setShown(UUID playerId) {
+        if (shownPlayers.add(playerId)) {
+            setDirty();
+        }
     }
 }

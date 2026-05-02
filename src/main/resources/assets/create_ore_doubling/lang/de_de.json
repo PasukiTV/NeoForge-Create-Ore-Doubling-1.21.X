@@ -1,8 +1,8 @@
 {
-  "create_double_ore.welcome.title": "Create Double Ores!",
-  "create_double_ore.welcome.body1": "Hast du Ideen zur Verbesserung?",
-  "create_double_ore.welcome.body2": "Ich freue mich über dein Feedback!",
-  "create_double_ore.welcome.body3": "Feedback auf CurseForge",
+  "create_double_ore.welcome.title": "Create Double Ores geladen.",
+  "create_double_ore.welcome.feedback_intro": "Feedback:",
+  "create_double_ore.welcome.feedback.github": "Github",
+  "create_double_ore.welcome.feedback.discord": "Discord",
   "create_double_ore.configuration.title": "Create Ore Doubling Einstellungen",
   "create_double_ore.configuration.section.create_double_ore.common.toml": "Create Ore Doubling",
   "create_double_ore.configuration.section.create_double_ore.common.toml.title": "Rezept-Chancen",

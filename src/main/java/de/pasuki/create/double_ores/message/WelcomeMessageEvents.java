@@ -12,43 +12,42 @@ import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
 @EventBusSubscriber(modid = Create_Double_Ore.MOD_ID)
 public final class WelcomeMessageEvents {
+    private static final String GITHUB_URL = "https://github.com/PasukiTV/NeoForge-Create-Double-Ores-1.21.1/issues";
+    private static final String DISCORD_URL = "https://discord.gg/9y97PyeD6s";
 
     @SubscribeEvent
-    public static void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
+    public static void onPlayerJoined(PlayerEvent.PlayerLoggedInEvent event) {
         if (!(event.getEntity() instanceof ServerPlayer player)) return;
 
         ServerLevel overworld = player.server.overworld();
         WelcomeMessageData data = WelcomeMessageData.get(overworld);
+        var playerId = player.getUUID();
 
-        if (!data.wasShown()) {
+        if (!data.wasShown(playerId)) {
             player.sendSystemMessage(
                     Component.translatable("create_double_ore.welcome.title")
-                            .withStyle(ChatFormatting.GOLD)
-            );
-
-            player.sendSystemMessage(
-                    Component.translatable("create_double_ore.welcome.body1")
                             .withStyle(ChatFormatting.GRAY)
             );
 
             player.sendSystemMessage(
-                    Component.translatable("create_double_ore.welcome.body2")
-                            .withStyle(ChatFormatting.GRAY)
+                    Component.translatable("create_double_ore.welcome.feedback_intro")
+                            .withStyle(ChatFormatting.DARK_GRAY)
+                            .append(Component.literal(" "))
+                            .append(link("create_double_ore.welcome.feedback.github", GITHUB_URL))
+                            .append(Component.literal(" | ").withStyle(ChatFormatting.DARK_GRAY))
+                            .append(link("create_double_ore.welcome.feedback.discord", DISCORD_URL))
             );
 
-            player.sendSystemMessage(
-                    Component.translatable("create_double_ore.welcome.body3")
-                            .withStyle(style -> style
-                                    .withColor(ChatFormatting.AQUA)
-                                    .withUnderlined(true)
-                                    .withClickEvent(new ClickEvent(
-                                            ClickEvent.Action.OPEN_URL,
-                                            "https://www.curseforge.com/minecraft/mc-mods/create-double-ores/comments"
-                                    ))
-                            )
-            );
-
-            data.setShown();
+            data.setShown(playerId);
         }
+    }
+
+    private static Component link(String key, String url) {
+        return Component.translatable(key)
+                .withStyle(style -> style
+                        .withColor(ChatFormatting.AQUA)
+                        .withUnderlined(true)
+                        .withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, url))
+                );
     }
 }
