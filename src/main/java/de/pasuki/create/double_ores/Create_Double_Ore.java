@@ -4,15 +4,14 @@ import com.mojang.logging.LogUtils;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeManager;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.ModContainer;
-import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.config.ModConfig;
-import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.event.server.ServerStartingEvent;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.server.ServerStartingEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModLoadingContext;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import org.slf4j.Logger;
 
 import java.lang.reflect.Field;
@@ -37,9 +36,9 @@ public class Create_Double_Ore {
             ResourceLocation.parse("create:crushing/raw_zinc_block")
     };
 
-    public Create_Double_Ore(IEventBus ignoredModEventBus, ModContainer modContainer) {
-        NeoForge.EVENT_BUS.register(this);
-        modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+    public Create_Double_Ore() {
+        MinecraftForge.EVENT_BUS.register(this);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
 
     @SubscribeEvent
@@ -69,14 +68,14 @@ public class Create_Double_Ore {
     }
 
     private static int applyConfiguredChances(RecipeManager recipeManager, ResourceLocation recipeId, boolean isBlockRecipe) {
-        RecipeHolder<?> holder = recipeManager.byKey(recipeId).orElse(null);
-        if (holder == null) {
+        Recipe<?> recipe = recipeManager.byKey(recipeId).orElse(null);
+        if (recipe == null) {
             LOGGER.warn("[{}] Recipe not found; skipping chance update", recipeId);
             return -1;
         }
 
-        Object recipe = holder.value();
-        List<?> outputs = extractOutputs(recipe);
+        Object recipeObject = recipe;
+        List<?> outputs = extractOutputs(recipeObject);
         if (outputs == null) {
             LOGGER.warn("[{}] Could not access recipe outputs; this may indicate a Create API/internal format change", recipeId);
             return -1;

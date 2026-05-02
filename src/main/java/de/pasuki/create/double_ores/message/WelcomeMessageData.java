@@ -1,13 +1,10 @@
 package de.pasuki.create.double_ores.message;
 
-import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.datafix.DataFixTypes;
 import net.minecraft.world.level.saveddata.SavedData;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -20,7 +17,7 @@ public class WelcomeMessageData extends SavedData {
 
     private final Set<UUID> shownPlayers = new HashSet<>();
 
-    public static WelcomeMessageData load(CompoundTag tag, HolderLookup.Provider provider) {
+    public static WelcomeMessageData load(CompoundTag tag) {
         WelcomeMessageData data = new WelcomeMessageData();
         ListTag list = tag.getList(KEY_SHOWN_PLAYERS, Tag.TAG_COMPOUND);
         for (int i = 0; i < list.size(); i++) {
@@ -33,7 +30,7 @@ public class WelcomeMessageData extends SavedData {
     }
 
     @Override
-    public @NotNull CompoundTag save(CompoundTag tag, HolderLookup.@NotNull Provider provider) {
+    public CompoundTag save(CompoundTag tag) {
         ListTag list = new ListTag();
         for (UUID uuid : shownPlayers) {
             CompoundTag playerEntry = new CompoundTag();
@@ -45,10 +42,7 @@ public class WelcomeMessageData extends SavedData {
     }
 
     public static WelcomeMessageData get(ServerLevel overworld) {
-        return overworld.getDataStorage().computeIfAbsent(
-                new SavedData.Factory<>(WelcomeMessageData::new, WelcomeMessageData::load, DataFixTypes.LEVEL),
-                DATA_NAME
-        );
+        return overworld.getDataStorage().computeIfAbsent(WelcomeMessageData::load, WelcomeMessageData::new, DATA_NAME);
     }
 
     public boolean wasShown(UUID playerId) {
