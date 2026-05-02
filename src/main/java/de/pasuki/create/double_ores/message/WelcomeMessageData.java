@@ -1,4 +1,4 @@
-package de.pasuki.create.double_ores;
+package de.pasuki.create.double_ores.message;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;

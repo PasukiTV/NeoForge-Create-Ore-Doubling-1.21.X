@@ -1,5 +1,6 @@
-package de.pasuki.create.double_ores;
+package de.pasuki.create.double_ores.message;
 
+import de.pasuki.create.double_ores.Create_Double_Ore;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
